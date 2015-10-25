@@ -4,7 +4,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        Hello wen
+        {this.props.children || <div>Hello world.</div>}
       </div>
     );
   }
