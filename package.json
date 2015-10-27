@@ -5,16 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production node server.js",
-    "prod": "NODE_ENV=production node server.js --start"
+    "build": "NODE_ENV=production node build.js",
+    "prod": "NODE_ENV=production node server.js"
   },
   "author": "wen",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.14.1",
+    "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
+    "express-session": "^1.12.0",
     "font-awesome": "^4.4.0",
     "history": "^1.12.5",
+    "mongoose": "^4.2.3",
     "normalize.css": "^3.0.3",
+    "passport": "^0.3.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

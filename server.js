@@ -1,15 +1,49 @@
 var webpack = require('webpack');
 var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
 var path = require('path');
 var config = require('./webpack.config');
 var prodConfig = require('./webpack.production.config');
 var app = express();
 var fs = require('fs');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var mongoose = require('mongoose');
+var mongoConfig = require('./config/mongo');
 
 var env = app.get('env');
 
 var port = process.env.PORT || 3000;
 var staticPath = path.join(__dirname, 'public');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+
+app.use(session({
+    resave: true,
+    saveUninitialized: false,
+    secret: 'bookmark',
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      db: 'bookmark'
+    })
+}));
+
+//连接mongodb
+function connect() {
+  mongoose.connect(mongoConfig.uri, mongoConfig.options);
+}
+
+connect();
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
+
+//后端API路由
+app.use('/api', require('./api'));
 
 if ('production' === env) {
   console.log('Webpack now compiles.');
@@ -53,22 +87,20 @@ if ('production' === env) {
 
         console.log('Compiled Success.');
         //创建服务器
-        if (process.argv.indexOf('--start') !== -1) {
-          app.use(express.static(staticPath));
+        app.use(express.static(staticPath));
 
-          app.get('/*', function(req, res) {
-            res.sendFile(path.join(staticPath, 'index.html'));
-          });
+        app.get('/*', function(req, res) {
+          res.sendFile(path.join(staticPath, 'index.html'));
+        });
 
-          app.listen(port, function(err) {
-            if (err) {
-              console.log(err);
-              return;
-            }
+        app.listen(port, function(err) {
+          if (err) {
+            console.log(err);
+            return;
+          }
 
-            console.log('Listening at http://localhost:' + port);
-          });
-        }
+          console.log('Listening at http://localhost:' + port);
+        });
       });
     });
 
