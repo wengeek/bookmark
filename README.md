@@ -1,4 +1,4 @@
-# flow
+# bookmark
 
 ### 概述
 采用React＋Redux的方式，结合webpack进行开发
