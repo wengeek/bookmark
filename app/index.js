@@ -1,4 +1,6 @@
-import React from 'react';
+/*eslint-disable no-unused-vars*/
+import React from 'react'; 
+/*eslint-enable no-unused-vars*/
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';

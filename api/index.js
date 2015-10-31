@@ -3,7 +3,7 @@
  * 路由设置
  */
 var express = require('express');
-var Tag = require('./controllers/tag.controller');
+var Tag = require('./controllers/tag');
 var router = express.Router();
 
 router.get('/tags', Tag.index);

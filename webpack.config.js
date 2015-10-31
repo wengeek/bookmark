@@ -17,7 +17,15 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
+  eslint: {  
+    configFile: '.eslintrc'
+  },
   module: {
+    preLoaders: [{
+      test: /(\.js$)/, 
+      exclude: /node_modules/, 
+      loader: "eslint-loader"
+    }],    
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],

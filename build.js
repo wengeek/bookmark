@@ -13,7 +13,9 @@ webpack(prodConfig, function(err, stats) {
     return;
   }
 
-  var assets = stats.toJson().assets.reverse(), key, asset, jsScripts = '', cssLinks = '';
+  var assets = stats.toJson().assets.reverse(),
+    key, asset, jsScripts = '',
+    cssLinks = '';
   for (key in assets) {
     asset = assets[key];
     if (asset.name.endsWith('.css')) {
@@ -21,7 +23,7 @@ webpack(prodConfig, function(err, stats) {
     }
     if (asset.name.endsWith('.js')) {
       jsScripts += '<script src="/' + asset.name + '"></script>';
-    }      
+    }
   }
 
   console.log('Compiling the html.');
@@ -32,13 +34,16 @@ webpack(prodConfig, function(err, stats) {
       return;
     }
 
-    var indexTemp = data.toString(), indexCompiled;
-  
+    var indexTemp = data.toString(),
+      indexCompiled;
+
     indexCompiled = indexTemp.replace(/<!--cssstart-->[\s\S]+<!--cssend-->/m, cssLinks);
-    indexCompiled = indexCompiled.replace(/<!--jsstart-->[\s\S]+<!--jsend-->/m, jsScripts);      
+    indexCompiled = indexCompiled.replace(/<!--jsstart-->[\s\S]+<!--jsend-->/m, jsScripts);
 
     //写入文件
-    fs.writeFile(path.join(staticPath, 'index.html'), indexCompiled, {encoding: 'utf8'}, function(err) {
+    fs.writeFile(path.join(staticPath, 'index.html'), indexCompiled, {
+      encoding: 'utf8'
+    }, function(err) {
       if (err) {
         console.log('Compiled failed. Please try later.');
         return;

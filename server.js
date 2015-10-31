@@ -18,19 +18,22 @@ var env = app.get('env');
 var port = process.env.PORT || 3000;
 var staticPath = path.join(__dirname, 'public');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(session({
-    resave: true,
-    saveUninitialized: false,
-    secret: 'bookmark',
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      db: 'bookmark'
-    })
+  resave: true,
+  saveUninitialized: false,
+  secret: 'bookmark',
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    db: 'bookmark'
+  })
 }));
 
 //连接mongodb
@@ -54,7 +57,9 @@ if ('production' === env) {
       return;
     }
 
-    var assets = stats.toJson().assets.reverse(), key, asset, jsScripts = '', cssLinks = '';
+    var assets = stats.toJson().assets.reverse(),
+      key, asset, jsScripts = '',
+      cssLinks = '';
     for (key in assets) {
       asset = assets[key];
       if (asset.name.endsWith('.css')) {
@@ -62,7 +67,7 @@ if ('production' === env) {
       }
       if (asset.name.endsWith('.js')) {
         jsScripts += '<script src="/' + asset.name + '"></script>';
-      }      
+      }
     }
 
     console.log('Compiling the html.');
@@ -73,13 +78,16 @@ if ('production' === env) {
         return;
       }
 
-      var indexTemp = data.toString(), indexCompiled;
-    
+      var indexTemp = data.toString(),
+        indexCompiled;
+
       indexCompiled = indexTemp.replace(/<!--cssstart-->[\s\S]+<!--cssend-->/m, cssLinks);
-      indexCompiled = indexCompiled.replace(/<!--jsstart-->[\s\S]+<!--jsend-->/m, jsScripts);      
+      indexCompiled = indexCompiled.replace(/<!--jsstart-->[\s\S]+<!--jsend-->/m, jsScripts);
 
       //写入文件
-      fs.writeFile(path.join(staticPath, 'index.html'), indexCompiled, {encoding: 'utf8'}, function(err) {
+      fs.writeFile(path.join(staticPath, 'index.html'), indexCompiled, {
+        encoding: 'utf8'
+      }, function(err) {
         if (err) {
           console.log('Compiled failed. Please try later.');
           return;
@@ -110,7 +118,7 @@ if ('production' === env) {
   var compiler = webpack(config);
 
   app.use(require("webpack-dev-middleware")(compiler, {
-    noInfo: true, 
+    noInfo: true,
     publicPath: config.output.publicPath,
     hot: true,
     historyApiFallback: true,
@@ -118,12 +126,12 @@ if ('production' === env) {
       colors: true
     }
   }));
-  
+
   app.use(require("webpack-hot-middleware")(compiler));
 
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
-  });  
+  });
 
   app.listen(port, function(err) {
     if (err) {
