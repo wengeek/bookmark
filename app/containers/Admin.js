@@ -1,21 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import AdminHeader from '../components/AdminHeader';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class Admin extends Component {
   render() {
+    let {children} = this.props;
     return (
       <div>
-        {this.props.children || <div>Hello bookmark.</div>}
+        <AdminHeader />
+        {children}
       </div>
     );
   }
 }
 
-App.PropTypes = {
+Admin.PropTypes = {
   children: PropTypes.node
 };
 
@@ -25,4 +24,4 @@ function mapStateToProps() {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Admin);

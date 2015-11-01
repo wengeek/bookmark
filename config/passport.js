@@ -2,6 +2,7 @@
  * passport配置
  */
 var mongoose = require('mongoose');
+var UserModel = require('../api/models/user');
 var User = mongoose.model('User');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -31,6 +32,7 @@ var local = new LocalStrategy({
 module.exports = function (passport) {
   // serialize sessions
   passport.serializeUser(function(user, done) {
+    console.log(user);
     done(null, user.id)
   })
 

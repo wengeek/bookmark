@@ -36,6 +36,8 @@ app.use(session({
   })
 }));
 
+require('./config/passport')(passport);
+
 //连接mongodb
 function connect() {
   mongoose.connect(mongoConfig.uri, mongoConfig.options);
