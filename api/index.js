@@ -11,7 +11,6 @@ router.post('/register', User.register);
 router.post('/login', User.login);
 router.get('/register', User.getUsers);
 
-
 router.get('/tags', Tag.index);
 
 router.get('*', function(req, res) {

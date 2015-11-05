@@ -1,14 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import AdminHeader from '../components/AdminHeader';
 
 class Admin extends Component {
   render() {
     let {children} = this.props;
     return (
       <div>
-        <AdminHeader />
-        {children}
+        {children || <div>mark</div>}
       </div>
     );
   }

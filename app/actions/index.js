@@ -1,5 +1,6 @@
 import * as actions from '../constants/ActionTypes';
 import fetch from 'isomorphic-fetch';
+import md5 from 'md5';
 
 /**
  * 用户注册
@@ -12,7 +13,7 @@ function register(rn) {
   };
 }
 
-export function requestRegister(username, email, password) {
+export function requestRegister(username, email, password, cb) {
   return dispatch => {
     fetch('/api/register', {
       method: 'post',
@@ -24,10 +25,12 @@ export function requestRegister(username, email, password) {
       body: JSON.stringify({
         username: username,
         email: email,
-        password: password
+        password: md5(md5(password))
       })
     }).then(response => response.json()).then(json => {
-      console.log(json);
+      if (json.rtn === 0) {
+        cb && cb();
+      }
       dispatch(register({
         rtn: json.rtn,
         msg: json.msg
@@ -47,7 +50,7 @@ function login(rn) {
   };
 }
 
-export function requestLogin(email, password) {
+export function requestLogin(email, password, cb) {
   return dispatch => {
     fetch('/api/login', {
       method: 'post',
@@ -58,10 +61,12 @@ export function requestLogin(email, password) {
       },
       body: JSON.stringify({
         email: email,
-        password: password
+        password: md5(md5(password))
       })      
     }).then(response => response.json()).then(json => {
-      console.log(json);
+      if(json.rtn === 0) {
+        cb && cb();
+      }
       dispatch(login({
         rtn: json.rtn,
         msg: json.msg

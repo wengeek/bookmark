@@ -11,19 +11,31 @@ import Login from './containers/admin/Login';
 import Register from './containers/admin/Register';
 import 'normalize.css';
 import 'font-awesome/css/font-awesome.min.css';
+import './css/style.css';
+import auth from './utils/auth';
 
 let store = configureStore();
 let history = createHistory();
+
+function requireAuth(nextState, replaceState) {
+  if(!auth.loggedIn()) {
+    replaceState({ nextPathname: nextState.location.pathname }, '/admin/login');
+  }
+}
+
+function notRequireAuth(nextState, replaceState) {
+  if(auth.loggedIn()) {
+    replaceState({ nextPathname: nextState.location.pathname }, '/admin');
+  }
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-
-        <Route path="/admin" component={Admin}>
-          <Route path="/admin/login" component={Login} />
-          <Route path="/admin/register" component={Register} />
-        </Route>
+        <Route path="/admin" component={Admin} onEnter={requireAuth} />
+        <Route path="/admin/register" component={Register} onEnter={notRequireAuth}/>
+        <Route path="/admin/login" component={Login} onEnter={notRequireAuth}/>
       </Route>
     </Router>
   </Provider>,

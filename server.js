@@ -12,6 +12,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var mongoConfig = require('./config/mongo');
+var cookieConfig = require('./config/cookie');
 
 var env = app.get('env');
 
@@ -21,11 +22,8 @@ var staticPath = path.join(__dirname, 'public');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 
+//If enabled, be sure to use express.session() before passport.session()
 app.use(session({
   resave: true,
   saveUninitialized: false,
@@ -33,8 +31,14 @@ app.use(session({
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     db: 'bookmark'
-  })
+  }),
+  cookie: cookieConfig
 }));
+
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./config/passport')(passport);
 

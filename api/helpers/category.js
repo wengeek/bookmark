@@ -1,21 +1,21 @@
 'use strict';
 
-var Tag = require('../models/tag');
+var User = require('../models/user');
 
 exports.create = function(params) {
   return new Promise(function(resolve, reject) {
-    Tag.create(params, function (err, tag) {
+    User.create(params, function (err, user) {
       if(err) {
         return reject(err);
       }
-      resolve(tag);
+      resolve(user);
     });
   });
 };
 
 exports.findAll = function(params) {
 	return new Promise(function(resolve, reject) {
-		Tag.find(params).populate('Bookmark').exec(function(err, users) {
+		User.find().exec(function(err, users) {
 			if(err) {
 				return reject(err);
 			}
