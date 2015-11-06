@@ -8,7 +8,7 @@ var lastMod = require('../utils/mongoose-lastmod');
 var Schema = mongoose.Schema;
 
 var BookmarkSchema = new Schema({
-	name: {type: String, default: '', unique: true},
+  name: {type: String, default: '', unique: true},
   created: {type: Date, default: Date.now},
   author: {type: Schema.Types.ObjectId, ref: 'User'}
 });

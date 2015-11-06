@@ -3,6 +3,6 @@
  */
 
 module.exports = {
-	httpOnly: false,
-	maxAge: 2592000
+  httpOnly: false,
+  maxAge: 2592000
 };

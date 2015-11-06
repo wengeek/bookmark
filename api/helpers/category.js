@@ -14,12 +14,12 @@ exports.create = function(params) {
 };
 
 exports.findAll = function(params) {
-	return new Promise(function(resolve, reject) {
-		User.find().exec(function(err, users) {
-			if(err) {
-				return reject(err);
-			}
-			resolve(users);
-		});
-	})
+  return new Promise(function(resolve, reject) {
+    User.find().exec(function(err, users) {
+      if(err) {
+        return reject(err);
+      }
+      resolve(users);
+    });
+  })
 };

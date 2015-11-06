@@ -3,11 +3,11 @@
  */
 module.exports = {
   uri: 'mongodb://localhost/bookmark',
-	options: {
-		server: {
-			socketOptions: {
-				keepAlive: 1
-			}
-		}
-	}
+  options: {
+    server: {
+      socketOptions: {
+        keepAlive: 1
+      }
+    }
+  }
 };

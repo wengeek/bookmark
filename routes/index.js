@@ -3,5 +3,5 @@
  * @param  {Object} app
  */
 module.exports = function(app) {
-	app.use('/api', require('./api'));
+  app.use('/api', require('./api'));
 };
