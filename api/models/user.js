@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 用户数据表 
+ * 用户数据表
  */
 
 var mongoose = require('mongoose');

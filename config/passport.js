@@ -27,8 +27,6 @@ var local = new LocalStrategy({
   }
 );
 
-
-
 module.exports = function (passport) {
   // serialize sessions
   passport.serializeUser(function(user, done) {

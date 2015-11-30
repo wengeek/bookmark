@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
 import Header from '../components/Header';
+import {requestCategoriesWithNoEmpty} from '../actions';
 
 class App extends Component {
   constructor(props) {
@@ -17,9 +17,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header logout={this.logout}/>
+        <Header logout={this.logout} />
         <div className="main">
-          {this.props.children || <div>Bookmarks</div>}
+          {this.props.children}
         </div>
       </div>
     );
@@ -31,10 +31,4 @@ App.PropTypes = {
   logout: PropTypes.Func
 };
 
-function mapStateToProps() {
-  return {
-    rtn: 0
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

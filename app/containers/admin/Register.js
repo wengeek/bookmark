@@ -1,38 +1,36 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {requestRegister} from '../../actions';
+import {requestRegister, resetErrorMessage} from '../../actions';
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.initRegister = true;
+  }
+
+  componentDidMount() {
+    const {dispatch} = this.props;
+    dispatch(resetErrorMessage());
   }
 
   handleSubmit(e) {
-    let {dispatch, history, location} = this.props;
+    const {dispatch, history, location} = this.props;
     e.preventDefault();
-    dispatch(requestRegister(this.refs.username.value, this.refs.email.value, this.refs.pass.value, function() {
-      if (location.state && location.state.nextPathname) {
-        history.replaceState(null, location.state.nextPathname);
-      } else {
-        history.replaceState(null, '/admin');
-      }
-    }));
+    dispatch(requestRegister(this.refs.username.value, this.refs.email.value, this.refs.pass.value, '/admin'));
     return;
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.errorMessage !== nextProps.errorMessage;
+  }
+
   renderErrMsg() {
-    if (this.props.rtn === 0 || this.initRegister) {
-      this.initRegister = false;
-      return null;
-    }
     return (
       <div className="form-group error">
-        <span>{this.props.msg}</span>
+        <span>{this.props.errorMessage}</span>
       </div>
     );
-  }  
+  }
 
   render() {
     return (
@@ -46,8 +44,8 @@ class Register extends Component {
         <div className="form-group">
           <input type="text" className="form-control" required minLength="6" maxLength="20" placeholder="密码" ref="pass" />
         </div>
-        {this.renderErrMsg()}        
-        <div className="form-group">       
+        {this.renderErrMsg()}
+        <div className="form-group">
           <input type="submit" className="btn" value="注册" />
         </div>
       </form>
@@ -56,10 +54,9 @@ class Register extends Component {
 }
 
 function mapStateToProps(state) {
-  const {admin} = state;
+  const {errorMessage} = state;
   return {
-    rtn: admin.rtn,
-    msg: admin.msg
+    errorMessage
   };
 }
 

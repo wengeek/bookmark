@@ -2,6 +2,15 @@ html, body {
   width: 100%;
 }
 
+body {
+  font-family: monospace, "Source Sans Pro", Helvetica, "Microsoft Yahei", sans-serif;
+  font-size: 14px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+ }
+
 .header {
   z-index: 101;
   position: fixed;
@@ -15,7 +24,7 @@ html, body {
   background-color: #2d9bcb;
   box-sizing:border-box;
   -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box; 
+  -webkit-box-sizing:border-box;
   -webkit-box-shadow: 0 3px 5px #E8E8E8;
   box-shadow: 0 3px 5px #E8E8E8;
   -webkit-user-select: none;
@@ -32,7 +41,7 @@ html, body {
 .header a {
   color: #fff;
   text-decoration: none;
-  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .header .pull-right {
@@ -47,6 +56,7 @@ html, body {
 
 .header .pull-right a {
   margin-right: 15px;
+  font-size: .85em;
 }
 
 .header .pull-right a:hover, .header .pull-right a.active {
@@ -60,7 +70,7 @@ html, body {
   height: 100%;
   box-sizing:border-box;
   -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;  
+  -webkit-box-sizing:border-box;
 }
 
 .main .login, .main .register {
@@ -119,7 +129,6 @@ html, body {
   color: #999;
 }
 
-
 .btn {
   display: inline-block;
   padding: 6px 26px;
@@ -129,6 +138,7 @@ html, body {
   line-height: 1.42857143;
   text-align: center;
   white-space: nowrap;
+  text-decoration: none;
   vertical-align: middle;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
@@ -167,3 +177,266 @@ html, body {
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
+.sidebar {
+  position: fixed;
+  width: 210px;
+  height: 100%;
+}
+
+.sidebar ul {
+  width: 180px;
+  margin: 20px auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: .9em;
+}
+
+.sidebar ul li {
+  width: 100%;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #000;
+  transition: all .2s;
+}
+
+.sidebar ul li a.active, .sidebar ul li a:hover{
+  background-color: #f8f8f8;
+  border-left: 3px solid #0e90d2;
+  border-right: 3px solid #0e90d2;
+  border-radius: 20px;
+  color: #0e90d2;
+}
+
+.mainsection {
+  margin-left: 210px;
+  padding: 20px 30px 10px 30px;
+}
+
+.mainsection .category-add .btn {
+  margin-right: 20px;
+}
+
+.category-form, .tag-form, .bookmark-form {
+  margin-top: 10px;
+  padding: 20px 10px 0;
+  max-width: 640px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.category-form .cancel, .tag-form .cancel, .bookmark-form .cancel{
+  margin-left: 20px;
+  background-color: #efefef;
+  border-color: #eee;
+  color: #666;
+}
+
+.admin .categories {
+  padding: 20px 0 10px;
+}
+
+.admin .categories > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin .categories > ul li {
+  overflow: hidden;
+  border: 1px solid #2d9bcb;
+  border-bottom: 0;
+}
+
+.admin .categories .category-title {
+  padding: 10px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.admin .categories .category-content {
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.admin .categories > ul li:first-child {
+  border-bottom: 0;
+  border-top-left-radius:10px;
+  border-top-right-radius: 10px;
+}
+
+.admin .categories > ul li:last-child {
+  border-bottom: 1px solid #2d9bcb;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.item {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #0e90d2;
+  border-radius: 4px;
+  color: #536169;
+  transition: all .1s;
+  cursor: default;
+}
+
+.item:hover {
+  border-radius: 20px;
+  -o-box-shadow:0 0 3px 0px #0e90d2,0px 1px 6px 0px #888;
+  box-shadow:0 0 3px 0px #0e90d2,0px 1px 6px 0px #888;
+  transform:translateY(-3px);
+}
+
+a.item {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin .bookmarks {
+  margin-top: 5px;
+}
+
+.admin .bookmarks .category {
+  padding-top: 5px;
+}
+
+.admin .bookmarks .category h3 {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 2px solid #0E90D2;
+  color: #3FA5D9;
+  font-size: .9em;
+}
+
+.admin .bookmarks .category .tag h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 22px;
+  font-size: .9em;
+  font-weight: normal;
+}
+
+.admin .bookmarks .category .tag .bookmark {
+  padding-left: 26px;
+}
+
+.admin .bookmarks .category .tag .bookmark .empty{
+  margin-bottom: 10px;
+  font-size: .9em;
+  color: #82B8D4;
+}
+
+.app .tag h4 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-left: 3px solid #0E90D2;
+  border-radius: 20px;
+  color: #3FA5D9;
+  font-size: .9em;
+  font-weight: normal;
+}
+
+.app .tag .bookmarks {
+  padding-left: 25px;
+}
+
+.bookmark-empty {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.bookmark-empty i {
+  color: #2D9BCB;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.bookmark-empty .empty-content {
+  font-size: 1.1em;
+  color: #2D9BCB;
+}
+
+.sidebar .arrow {
+  display: none;
+  position: absolute;
+  left: 0;
+  padding: 5px 0 5px  10px;
+  font-size: 1.1em;
+}
+
+.sidebar .arrow i {
+  color: #0578AB;
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 10px;
+    border-bottom: 2px solid #2D9BCB;
+    transition: height .5s ease;
+    -webkit-transition: height .5s ease;
+  }
+  .sidebar .arrow {
+    display: inline-block;
+  }
+  .sidebar .arrow i {
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+  }
+  .sidebar .arrow .arrow-active {
+    transform: rotateZ(-180deg);
+    -webkit-transform: rotateZ(-180deg);
+  }
+  .sidebar ul {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    font-size: 1.1em;
+    padding-left: 25px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+  .sidebar ul li {
+    display: inline-block;
+    width: auto;
+    margin: 0 10px;
+    padding-bottom: 5px;
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+  }
+  .sidebar ul li a {
+    display: inline-block;
+    padding: 5px;
+    color: #3B6171;
+    border-bottom: 3px solid #ffffff;
+  }
+  .sidebar ul li a.active, .sidebar ul li a:hover {
+    border: none;
+    border-radius: 0;
+    border-bottom: 3px solid #2D9BCB;
+  }
+  .mainsection {
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 10px;
+  }
+  .admin .mainsection {
+    padding-top: 20px;
+    padding: 20px 30px 10px;
+  }
+}

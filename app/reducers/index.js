@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux';
 import admin from './admin';
+import app from './app';
+import errorMessage from './errorMessage';
 
 const rootReducer = combineReducers({
-  admin
+  app,
+  admin,
+  errorMessage
 });
 export default rootReducer;

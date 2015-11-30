@@ -16,7 +16,7 @@ var cookieConfig = require('./config/cookie');
 
 var env = app.get('env');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 var staticPath = path.join(__dirname, 'public');
 
 app.use(bodyParser.urlencoded({
@@ -69,7 +69,7 @@ if ('production' === env) {
     for (key in assets) {
       asset = assets[key];
       if (asset.name.endsWith('.css')) {
-        cssLinks += '<link rel="stylesheet" href="/' + asset.name + '">';
+        cssLinks += '<link rel="stylesheet" href="/' + asset.name + '" />';
       }
       if (asset.name.endsWith('.js')) {
         jsScripts += '<script src="/' + asset.name + '"></script>';
@@ -103,7 +103,7 @@ if ('production' === env) {
         //创建服务器
         app.use(express.static(staticPath));
 
-        app.get('/*', function(req, res) {
+        app.get('*', function(req, res) {
           res.sendFile(path.join(staticPath, 'index.html'));
         });
 
@@ -135,7 +135,7 @@ if ('production' === env) {
 
   app.use(require("webpack-hot-middleware")(compiler));
 
-  app.get('/*', function(req, res) {
+  app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
 

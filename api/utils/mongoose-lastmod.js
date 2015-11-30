@@ -3,7 +3,7 @@
  */
 
 module.exports = function lastModifiedPlugin (schema) {
-  schema.add({ lastMod: Date })
+  schema.add({lastMod: Date})
   
   schema.pre('save', function (next) {
     this.lastMod = new Date
