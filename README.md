@@ -1,7 +1,9 @@
 # bookmark
 
+演示地址：[https://bm.wenjs.me](https://bm.wenjs.me)
+
 ### 概述
-采用React＋Redux的方式，结合webpack进行开发
+前端采用React＋Redux的方式，结合webpack进行开发，后端采用Express + MongoDB
 
 ### 安装mongodb
 Mac下，采用brew install mongodb
